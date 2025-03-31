@@ -2,6 +2,7 @@ import os
 import json
 import subprocess
 import time
+import sys
 
 def run_python_files(directory, timeout=60, poll_interval=0.5):
     print("Running Python files concurrently...")
@@ -10,14 +11,17 @@ def run_python_files(directory, timeout=60, poll_interval=0.5):
         f for f in os.listdir(directory)
         if f.endswith('.py') and f != os.path.basename(__file__)
     ]
-    # Start processes in the specified directory
+    # Use sys.executable to ensure the subprocess uses your active .venv
+    python_executable = sys.executable
     processes = []
     for filename in python_files:
         print(f"Executing: {filename}")
-        proc = subprocess.Popen(['python', filename], cwd=directory)
+        # Pass the current environment variables so that PATH includes your updated chromedriver location
+        env = os.environ.copy()
+        proc = subprocess.Popen([python_executable, filename], cwd=directory, env=env)
         processes.append({'filename': filename, 'process': proc, 'start_time': time.time()})
 
-    # Poll until all processes have finished or been terminated
+    # Poll until all processes have finished or are terminated
     while processes:
         for proc_info in processes.copy():
             proc = proc_info['process']

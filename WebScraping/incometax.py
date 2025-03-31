@@ -7,6 +7,8 @@ from bs4 import BeautifulSoup
 from PyPDF2 import PdfReader
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
 # Set up download directory for PDFs
 DOWNLOAD_DIR = os.path.abspath("pdfs")
@@ -23,7 +25,8 @@ def init_selenium():
         "download.directory_upgrade": True,
         "plugins.always_open_pdf_externally": True
     })
-    driver = webdriver.Chrome(options=chrome_options)
+    # Use webdriver-manager to get the correct ChromeDriver version
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
     return driver
 
 def selenium_download_pdf(driver, pdf_url, timeout=10):

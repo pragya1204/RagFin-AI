@@ -6,6 +6,8 @@ from bs4 import BeautifulSoup
 from PyPDF2 import PdfReader
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
 # Set up download directory for PDFs
 DOWNLOAD_DIR = os.path.abspath("pdfs")
@@ -22,7 +24,8 @@ def init_selenium(headless=True):
         "download.prompt_for_download": False,
         "download.directory_upgrade": True
     })
-    driver = webdriver.Chrome(options=chrome_options)
+    # Use webdriver-manager to get the proper ChromeDriver
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
     return driver
 
 def download_pdf_via_requests(driver, pdf_url):
@@ -70,7 +73,6 @@ def extract_text_from_pdf(pdf_path):
         filtered_text = ''.join(char if ord(char) < 128 else '' for char in extracted_text)
         text += filtered_text
     return text
-
 
 def load_processed_notifications(json_file='rbi_notifications.json'):
     """Loads previously processed notifications from a JSON file."""
@@ -132,7 +134,7 @@ def main():
     # Load already processed notifications from JSON
     processed = load_processed_notifications()
     
-    # Initialize Selenium driver (try non-headless mode for debugging if needed)
+    # Initialize Selenium driver
     driver = init_selenium(headless=True)
     
     for notif in notifications:
