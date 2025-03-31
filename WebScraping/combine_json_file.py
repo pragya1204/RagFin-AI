@@ -10,12 +10,11 @@ def run_python_files(directory, timeout=60, poll_interval=0.5):
         f for f in os.listdir(directory)
         if f.endswith('.py') and f != os.path.basename(__file__)
     ]
-    # Start processes and track start times
+    # Start processes in the specified directory
     processes = []
     for filename in python_files:
-        file_path = os.path.join(directory, filename)
         print(f"Executing: {filename}")
-        proc = subprocess.Popen(['python', file_path])
+        proc = subprocess.Popen(['python', filename], cwd=directory)
         processes.append({'filename': filename, 'process': proc, 'start_time': time.time()})
 
     # Poll until all processes have finished or been terminated
@@ -40,7 +39,6 @@ def combine_json_files(directory, output_file):
     output_filename = os.path.basename(output_file)
 
     for filename in os.listdir(directory):
-        # Skip the output file if it already exists
         if filename.endswith('.json') and filename != output_filename:
             file_path = os.path.join(directory, filename)
             try:
@@ -55,11 +53,11 @@ def combine_json_files(directory, output_file):
 
     with open(output_file, 'w') as f:
         json.dump(combined_data, f, indent=4)
-    print(f"Combined data has been written to {output_file}")
+    print(f"Combined data written to {output_file}")
 
 if __name__ == "__main__":
-    input_directory = './'
-    output_file = 'data.json'
+    input_directory = os.path.dirname(os.path.abspath(__file__))
+    output_file = os.path.join(input_directory, 'data.json')
 
     run_python_files(input_directory)
     combine_json_files(input_directory, output_file)
