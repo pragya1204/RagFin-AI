@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Updated theme with deep black, dark blue, and subtle purple */
+    --background: 230 35% 4%; /* Almost black with a hint of blue */
+    --foreground: 220 30% 92%; /* Light grayish-blue for contrast */
+
+    --muted: 230 25% 10%; /* Very dark muted blue */
+    --muted-foreground: 220 15% 65%; /* Soft text for muted areas */
+
+    --accent: 260 35% 15%; /* Deep dark purple accent */
+    --accent-foreground: 220 30% 92%; /* Light text for accents */
+
+    --popover: 230 30% 8%; /* Slightly lighter popover background */
+    --popover-foreground: 220 30% 92%; /* Popover text */
+
+    --border: 230 20% 18%; /* Dark but noticeable border color */
+    --input: 230 20% 18%; /* Input field color */
+
+    --card: 230 30% 6%; /* Card background similar to popovers */
+    --card-foreground: 220 30% 92%; /* Card text color */
+
+    --primary: 220 20% 90%; /* Deep dark blue */
+    --primary-foreground: 220 30% 92%; /* White-ish text on primary buttons */
+
+    --secondary: 280 40% 40%; /* Dark blue-purple */
+    --secondary-foreground: 220 30% 92%; /* Light text for secondary elements */
+
+    --destructive: 0 70% 40%; /* Dark red for destructive actions */
+    --destructive-foreground: 0 0% 100%; /* White text on destructive buttons */
+
+    --ring: 230 30% 25%; /* Ring color for focus states */
+    
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.glow-effect {
+  box-shadow: 0 0 15px rgba(40, 20, 80, 0.6); /* Deep blue glow */
+}
+
+.futuristic-gradient {
+  background: linear-gradient(135deg, rgba(15, 10, 25, 0.9) 0%, rgba(5, 5, 15, 1) 100%);
+}
+
+.message-bubble {
+  position: relative;
+  overflow: hidden;
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  border-radius: var(--radius);
+}
+
+.message-bubble::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(100, 40, 160, 0.3), transparent);
+}
+
+/* Hide scrollbar for Chrome, Safari, and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge, and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
