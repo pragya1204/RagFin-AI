@@ -1,0 +1,16 @@
+Flask==3.1.0
+flask-cors==5.0.1
+gunicorn==23.0.0
+pymongo==4.11.3
+python-dotenv==1.0.1
+langchain==0.3.19
+langchain-community==0.3.18
+langchain-huggingface==0.1.2
+pinecone-client==5.0.1
+transformers==4.49.0
+huggingface-hub==0.29.0
+sentence-transformers==3.4.1
+requests==2.32.3
+openai==0.28.0
+datasets==3.3.2
+groq==0.20.0
