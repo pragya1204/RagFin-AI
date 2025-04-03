@@ -20,7 +20,6 @@ import {
   History,
   User,
 } from "lucide-react"
-import "../app/globals.css";
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [detailsOpen, setDetailsOpen] = useState(false)
