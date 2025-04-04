@@ -38,7 +38,7 @@ Context from recent financial data/notifications:
 
 User Query: {query}
 
-RagFin AI Answer:
+
 """
     prompt = PromptTemplate(input_variables=["query", "context"], template=prompt_template)
     # Ensure context is not overly long for the prompt template limit
