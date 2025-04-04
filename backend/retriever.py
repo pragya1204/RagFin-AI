@@ -79,7 +79,7 @@ if __name__ == "__main__":
 
             # Check page_content (should be the chunk text now)
             if hasattr(doc, 'page_content') and doc.page_content:
-                print(f"    page_content (Chunk Text Snippet): {doc.page_content[:250]}...")
+                print(f"  page_content (Full Text):\n{'-'*10}\n{doc.page_content}\n{'-'*10}")
             else:
                  print("    WARNING: page_content attribute missing or empty.")
             print("-" * 10)
