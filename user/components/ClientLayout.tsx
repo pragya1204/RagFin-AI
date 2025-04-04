@@ -5,6 +5,7 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import Image from "next/image"; // Import next/image
 import {
   Settings,
   Users,
@@ -12,19 +13,18 @@ import {
   X,
   Bot,
   Menu,
-  History, // Still potentially used for the right panel itself
+  History,
   User,
-  Star, // Import Star icon for Premium button
+  Star,
 } from "lucide-react";
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  // State for the right panel (which is no longer toggled from header)
   const [detailsOpen, setDetailsOpen] = useState(false);
 
   return (
     <div className="flex h-screen bg-background overflow-hidden">
-      {/* Sidebar - No changes */}
+      {/* Sidebar */}
       <div
         className={cn(
           "fixed inset-y-0 left-0 z-30 w-64 border-r border-border/40 bg-gradient-to-b from-background to-background/90 backdrop-blur-sm transition-transform duration-300 ease-in-out lg:translate-x-0",
@@ -34,10 +34,20 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         {/* Sidebar Header */}
         <div className="p-4 border-b border-border/40">
           <div className="flex items-center justify-between">
+            {/* Logo and Title */}
             <div className="flex items-center gap-2">
-              <div className="h-6 w-6 rounded-full bg-gradient-to-r from-primary to-secondary glow-effect" />
+              {/* --- Logo Added Here --- */}
+              <Image
+                  src="/ragfin_logo.jpg" // Assumes logo is in user/public/ragfin_logo.jpg
+                  alt="RagFin AI Logo"
+                  width={24} // Corresponds to w-6
+                  height={24} // Corresponds to h-6
+                  className="rounded-full" // Keep rounded style
+              />
+              {/* --- End of Logo --- */}
               <span className="font-semibold text-foreground">RagFin AI</span>
             </div>
+            {/* Sidebar Close Button */}
             <Button
               variant="ghost"
               size="icon"
@@ -103,30 +113,21 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
               </Button>
               <h1 className="text-sm font-medium text-foreground">AI Chat Interface</h1>
             </div>
-
-            {/* Right side: ADDED Premium button */}
+            {/* Right side: Premium button */}
             <div className="flex items-center gap-2">
-              {/* --- NEW Premium Button --- */}
               <Button
-                  //variant="premium" // Use a custom variant or inline styles for gold effect
                   size="sm"
-                  className="bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 text-black hover:from-yellow-500 hover:to-yellow-700" // Example gold gradient
-                  onClick={() => { alert("Premium Feature Clicked!"); }} // Add desired onClick action
+                  className="bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 text-black hover:from-yellow-500 hover:to-yellow-700"
+                  onClick={() => { alert("Premium Feature Clicked!"); }}
                   title="Upgrade to Premium"
               >
-                  <Star className="h-4 w-4 mr-1.5 fill-current" /> {/* Use fill-current for filled star */}
+                  <Star className="h-4 w-4 mr-1.5 fill-current" />
                   Premium
               </Button>
-              {/* --- END OF Premium Button --- */}
-
-              {/* You might keep other header items here if needed later */}
-               {/* Example: Button to toggle right panel if needed elsewhere */}
-               {/* <Button variant="ghost" size="icon" onClick={() => setDetailsOpen(!detailsOpen)} title="Toggle Details"> <History /> </Button> */}
-
             </div>
           </header>
 
-          {/* The actual page content (e.g., chat-interface) goes here */}
+          {/* Page content */}
           <main className="flex-1 overflow-y-auto">
               {children}
           </main>
@@ -134,7 +135,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       </div> {/* End Main Content Area */}
 
 
-      {/* Right Details Panel - Unchanged, remains hidden unless toggled elsewhere */}
+      {/* Right Details Panel - Unchanged */}
       <div
           className={cn(
             "fixed inset-y-0 right-0 z-20 w-80 border-l border-border/40 bg-background/95 backdrop-blur-sm transition-transform duration-300 ease-in-out",
