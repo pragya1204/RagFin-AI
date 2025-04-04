@@ -94,6 +94,76 @@ RagFin AI is built using the following technologies:
 
 ##  🔧Setup Instructions
 
+1. Clone Repository
+
+git clone <your-repository-url>
+cd pragya1204-ragfin-ai
+
+2. Backend Setup
+
+cd backend
+python -m venv .venv
+# On Windows:
+.\.venv\Scripts\activate
+# On macOS/Linux:
+source .venv/bin/activate
+pip install -r requirements.txt
+
+3. Configure Backend Environment
+
+Create a .env file in the backend directory with:
+
+PINECONE_API_KEY="YOUR_PINECONE_API_KEY"
+PINECONE_ENVIRONMENT="YOUR_PINECONE_ENVIRONMENT"
+INDEX_NAME="finance2"
+EMBEDDING_MODEL="sentence-transformers/all-roberta-large-v1"
+GROQ_API_KEY="YOUR_GROQ_API_KEY"
+GROQ_MODEL="llama3-8b-8192"
+MONGODB_URI="YOUR_MONGODB_CONNECTION_STRING"
+MONGODB_DB="ragfin"
+MONGODB_COLLECTION="chats"
+
+4. Frontend Setup
+
+cd ../user
+pnpm install   # or npm install
+
+5. Configure Frontend Environment
+
+Create a .env.local file in the user directory with:
+
+NEXT_PUBLIC_BACKEND_URL="http://localhost:5001"
+
+6. Pinecone Index Setup
+
+    Log in to Pinecone.
+
+    Create a new index named finance2 with 1024 dimensions and cosine metric.
+
+7. Data Pipeline – Generate/Update Financial Data
+
+cd WebScraping
+python combine_json_file.py
+
+(Ensure data.json is generated/updated with RBI notifications.)
+8. Index Financial Documents
+
+cd ../backend
+# (Optional: Delete processed_ids.json to re-index)
+python index.py
+
+9. Run the Backend Server
+
+python app.py
+
+(Backend will run on http://127.0.0.1:5001)
+10. Run the Frontend Server
+
+cd ../user
+pnpm dev   # or npm run dev
+
+(Access via http://localhost:3000)
+
 <!--line-->
 <img src="https://www.animatedimages.org/data/media/562/animated-line-image-0184.gif" width="1920" />
 
