@@ -6,8 +6,11 @@ import { useState, useRef, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Copy, Download, ThumbsUp, ThumbsDown, Send, Image, FileText, Paperclip, Mic, X } from "lucide-react"
+import { Copy, Download, ThumbsUp, ThumbsDown, Send,  Image as ImageIcon,FileText, Paperclip, Mic, X } from "lucide-react"
 import { cn } from "@/lib/utils"
+import logo from "@/public/ragfin_logo.jpg"
+import Image from "next/image"
+
 
 interface Message {
   role: "assistant" | "user"
@@ -160,7 +163,7 @@ export default function ChatInterface() {
               )}
             >
               {message.role === "assistant" && (
-                <div className="h-8 w-8 rounded-full bg-gradient-to-r from-primary to-secondary glow-effect flex-shrink-0" />
+               <Image src={logo} alt="Logo" width={24} height={24} className="w-8 h-8 rounded-full" />
               )}
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
@@ -291,7 +294,7 @@ export default function ChatInterface() {
                 onClick={() => handleFileUpload("image")}
                 title="Upload image"
               >
-                <Image className="h-4 w-4" />
+                <ImageIcon className="h-4 w-4" />
               </Button>
               <Button
                 variant="ghost"

@@ -6,6 +6,8 @@ import { useState } from "react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import logo from "@/public/ragfin_logo.jpg"
+import Image from "next/image"
 import {
   Settings,
   Users,
@@ -20,6 +22,7 @@ import {
   History,
   User,
 } from "lucide-react"
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [detailsOpen, setDetailsOpen] = useState(false)
@@ -36,8 +39,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="p-4 border-b border-border/40">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="h-6 w-6 rounded-full bg-gradient-to-r from-primary to-secondary glow-effect" />
-              <span className="font-semibold text-primary">RagFin AI</span>
+            <Image src={logo} alt="Logo" width={24} height={24} className="rounded-full" />
+            <span className="font-semibold text-primary">RagFin AI</span>
             </div>
             <Button
               variant="ghost"
@@ -53,7 +56,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <div className="space-y-4 p-4">
             <nav className="space-y-2">
               
-              
+            <Button
+                variant="ghost"
+                className="w-full justify-start text-muted-foreground hover:text-foreground hover:bg-accent"
+              >
+                <Users className="mr-2 h-4 w-4 text-primary" />
+                Chat Interface
+              </Button>
               
               <Button
                 variant="ghost"
@@ -78,13 +87,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <Bot className="mr-2 h-4 w-4 text-secondary" />
                 AI Models
               </Button>
-              <Button
-                variant="ghost"
-                className="w-full justify-start text-muted-foreground hover:text-foreground hover:bg-accent"
-              >
-                <BarChart2 className="mr-2 h-4 w-4 text-secondary" />
-                Analytics
-              </Button>
+             
             </div>
           </div>
         </ScrollArea>
