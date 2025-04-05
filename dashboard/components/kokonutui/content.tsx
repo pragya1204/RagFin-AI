@@ -28,6 +28,8 @@ import {
   User,
 } from "lucide-react"
 
+const CHAT_INTERFACE_URL = "http://localhost:3000";
+const DASHBOARD_URL = "http://localhost:3001";
 export default function () {
   const [sidebarOpen, setSidebarOpen] = useState(true)
   return (
@@ -58,20 +60,28 @@ export default function () {
         <ScrollArea className="h-[calc(100vh-130px)]">
           <div className="space-y-4 p-4">
             <nav className="space-y-2">
-              <Button
-                variant="ghost"
-                className="w-full justify-start text-muted-foreground hover:text-foreground hover:bg-accent"
-              >
-                <Users className="mr-2 h-4 w-4 text-primary" />
-                Chat Interface
-              </Button>
-              <Button
-                variant="ghost"
-                className="w-full justify-start text-muted-foreground hover:text-foreground hover:bg-accent"
-              >
-                <Users className="mr-2 h-4 w-4 text-primary" />
-                Dashboard
-              </Button>
+            <Button
+            variant="ghost"
+            className="w-full justify-start text-muted-foreground hover:text-foreground hover:bg-accent"
+            asChild // <-- Use asChild to render the Button as the child Link/a
+          >
+            <a href={CHAT_INTERFACE_URL}> {/* <-- Standard anchor tag */}
+              <Users className="mr-2 h-4 w-4 text-primary" />
+              Chat Interface
+            </a>
+          </Button>
+
+          {/* Link to Dashboard App */}
+          <Button
+            variant="ghost"
+            className="w-full justify-start text-muted-foreground hover:text-foreground hover:bg-accent"
+            asChild // <-- Use asChild
+          >
+            <a href={DASHBOARD_URL}> {/* <-- Standard anchor tag */}
+              <Users className="mr-2 h-4 w-4 text-primary" />
+              Dashboard
+            </a>
+          </Button>
               <Button
                 variant="ghost"
                 className="w-full justify-start text-muted-foreground hover:text-foreground hover:bg-accent"
