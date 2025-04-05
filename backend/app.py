@@ -385,4 +385,5 @@ if __name__ == "__main__":
     if not retriever: logging.critical("Retriever failed. Exiting."); exit(1)
     if not embedding_model: logging.critical("Embedding model failed. Exiting."); exit(1)
     if db is None or chat_collection is None: logging.warning("MongoDB unavailable. History disabled.")
-    app.run(debug=False, host='0.0.0.0', port=5001, use_reloader=False)
+    #app.run(debug=False, host='0.0.0.0', port=5001, use_reloader=False)
+    pass
