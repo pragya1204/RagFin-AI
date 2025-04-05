@@ -12,6 +12,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { ChatHeader } from "@/components/ChatHeader";
 // Import for Assistant Logo
 import Image from "next/image";
+import logo from "@/public/ragfin_logo.jpg"; // Adjust path as needed
 // --- ADJUST THE PATH to your actual logo file ---
  // Example path, ensure it's correct
 
@@ -281,7 +282,7 @@ export default function ChatInterface() {
                                 {message.role === "assistant" ? (
                                     // Use next/image with direct path string to public folder asset
                                     <Image
-                                        src="/ragfin_logo.jpg" // <<< CHANGE: Root-relative path string
+                                        src={logo} // <<< CHANGE: Root-relative path string
                                         alt="RagFin AI Logo"
                                         width={32} // Required dimensions for non-fill images
                                         height={32}

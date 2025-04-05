@@ -29,7 +29,7 @@ import {
 } from "lucide-react"
 
 const CHAT_INTERFACE_URL = "http://localhost:3000";
-const DASHBOARD_URL = "http://localhost:3001";
+const DASHBOARD_URL = "http://localhost:3002";
 export default function () {
   const [sidebarOpen, setSidebarOpen] = useState(true)
   return (
