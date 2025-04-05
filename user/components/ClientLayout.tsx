@@ -19,8 +19,8 @@ import {
   Star,
 } from "lucide-react";
 
-const CHAT_INTERFACE_URL = "http://localhost:3000";
-const DASHBOARD_URL = "http://localhost:3002";
+const CHAT_INTERFACE_URL = "https://chat-interface-mu-silk.vercel.app/";
+const DASHBOARD_URL = "https://dashboard-psi-seven-14.vercel.app/dashboard";
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [detailsOpen, setDetailsOpen] = useState(false);
