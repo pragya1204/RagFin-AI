@@ -28,8 +28,8 @@ import {
   User,
 } from "lucide-react"
 
-const CHAT_INTERFACE_URL = "https://chat-interface-mu-silk.vercel.app/";
-const DASHBOARD_URL = "https://dashboard-psi-seven-14.vercel.app/dashboard";
+const CHAT_INTERFACE_URL = "http://localhost:3000";
+const DASHBOARD_URL = "http://localhost:3001";
 export default function () {
   const [sidebarOpen, setSidebarOpen] = useState(true)
   return (

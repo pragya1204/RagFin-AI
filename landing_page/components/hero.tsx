@@ -2,7 +2,8 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link"; // Import Link for navigation
 // import { ArrowRight } from "lucide-react"; // Optional icon
 
-const CHAT_INTERFACE_URL = "https://chat-interface-mu-silk.vercel.app/";
+const CHAT_INTERFACE_URL = "http://localhost:3000";
+const DASHBOARD_URL = "http://localhost:3001";
 export default function Hero() {
   return (
     <section className="container flex min-h-[calc(100vh-4rem)] max-w-screen-2xl flex-col items-center justify-center space-y-8 py-24 text-center md:py-32"> {/* Adjusted height calc slightly if needed */}
