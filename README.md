@@ -7,6 +7,11 @@ Empower individuals and small businesses with smart, AI-driven financial tools t
 
 **RagFin AI** AI-powered Personal Finance & Tax Advisor integrates budgeting, tax filing, and investment planning into a single, seamless platform. Leveraging a RAG-based AI model, it automates data extraction, delivers personalized real-time financial insights, and adapts to regulatory changes, all while reducing manual effort.
 
+Our Finetuned Model: https://huggingface.co/Deepesh-001/RagFin-Ai/tree/main
+
+Our Self curated Custom dataset for finance laws and case studies: https://huggingface.co/datasets/Deepesh-001/Finance_taxlaws_casestudies/viewer/default/train?p=7&views%5B%5D=train
+
+
 
 ![WhatsApp Image 2025-04-04 at 21 21 46_6c4f5ab2](https://github.com/user-attachments/assets/cfbb1509-e104-4b11-857e-1bc5bead57e1)
 
