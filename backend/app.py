@@ -69,21 +69,34 @@ except Exception as e:
     logging.error(f"Could not connect to MongoDB: {e}")
 
 # --- Retriever Initialization ---
+embedding_model = None # Initialize
+try:
+    logging.info(f"Loading embedding model GLOBALLY: {EMBEDDING_MODEL}...")
+    embedding_model = SentenceTransformer(EMBEDDING_MODEL) # Load it FIRST
+    logging.info("Embedding model loaded successfully GLOBALLY.")
+except Exception as e:
+    logging.error(f"CRITICAL: Failed to load embedding model GLOBALLY: {e}")
+    # Exit if global model loading fails, app can't function
+    exit(1) # Use exit(1) to indicate error
+
+# --- Retriever Initialization (Pass the loaded model) ---
 retriever = None
 try:
-    retriever = get_retriever(k_results=TOP_K_RAG_CHUNKS)
-    logging.info("Retriever initialized successfully.")
+    # Check if the global model loaded successfully before trying to use it
+    if embedding_model is not None:
+        logging.info("Attempting to initialize retriever using the global model...")
+        # *** Pass the loaded 'embedding_model' object here ***
+        retriever = get_retriever(k_results=TOP_K_RAG_CHUNKS, model=embedding_model)
+        logging.info("Retriever initialized successfully (using shared model).")
+    else:
+        # This case should ideally not be reached due to exit() above, but good safety check
+        logging.error("CRITICAL: Global embedding model failed to load, cannot initialize retriever.")
+        exit(1) # Exit if model isn't loaded
+
 except Exception as e:
     logging.error(f"CRITICAL: Failed to initialize retriever: {e}")
-
-# --- Embedding Model Initialization ---
-embedding_model = None
-try:
-    logging.info(f"Loading embedding model: {EMBEDDING_MODEL}...")
-    embedding_model = SentenceTransformer(EMBEDDING_MODEL)
-    logging.info("Embedding model loaded successfully.")
-except Exception as e:
-    logging.error(f"CRITICAL: Failed to load embedding model: {e}")
+    # Exit if retriever initialization fails even with a loaded model
+    exit(1)
 
 # --- Text Splitter Initialization ---
 text_splitter = RecursiveCharacterTextSplitter(
